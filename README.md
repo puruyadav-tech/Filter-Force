@@ -12,6 +12,8 @@ This project builds a machine learning pipeline that automatically detects fraud
 Develop a system to classify job listings as fraudulent or genuine using structured and unstructured data. Display predictions and insights in an intuitive dashboard.
 
 🚀 Key Features
+
+
 ✅ Upload CSV job data and auto-detect frauds
 
 ✅ Binary classifier trained using XGBoost + SMOTE
