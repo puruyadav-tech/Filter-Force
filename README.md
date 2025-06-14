@@ -11,23 +11,60 @@ This project builds a machine learning pipeline that automatically detects fraud
 🎯 Problem Statement
 Develop a system to classify job listings as fraudulent or genuine using structured and unstructured data. Display predictions and insights in an intuitive dashboard.
 
-🚀 Key Features
+🚀 Automatic Job Fraud Detection
+Classifies job listings as real or fake using advanced machine learning techniques.
 
+🧠 Hybrid Feature Engineering
+Combines TF-IDF text vectors with structured numeric features:
 
-✅ Upload CSV job data and auto-detect frauds
+-Description length & word count
 
-✅ Binary classifier trained using XGBoost + SMOTE
+-Suspicious keywords (e.g., money, bitcoin)
 
-✅ Visual insights:
+-Free email domain indicators (e.g., gmail.com, yahoo.com)
 
-📊 Histogram of fraud probabilities
+-Digit count in job titles
 
-🥧 Pie chart of fraud vs real
+🌲 XGBoost Classifier for Accuracy & Speed
 
-🔝 Top-10 most suspicious listings
+Leverages the power of XGBoost — a high-performance gradient boosting algorithm — for fast training and accurate predictions.
 
-✅ SHAP plot for model explainability
+⚖️ Class Imbalance Handling with SMOTE
+Uses SMOTE oversampling to improve detection of rare fraudulent cases without overfitting.
 
+🧪 F1-Optimized Threshold Tuning
+
+Dynamically selects the best threshold using precision-recall curve to maximize the F1-score — ideal for imbalanced data.
+
+📊 Visual Analytics Dashboard
+
+-Histogram of fraud probabilities
+
+-Pie chart of predicted real vs. fake listings
+
+-Threshold vs. F1-score visualization
+
+-SHAP summary plots for feature importance
+
+🔍 Explainable AI with SHAP
+
+-Visualize top contributing features
+
+-Interpret individual predictions
+
+-Enhance transparency and trust in model decisions
+
+✉️ High-Risk Job Alert System
+
+Automatically flags listings with fraud probability ≥ 0.8 and supports email alerts via SMTP integration.
+
+🔗 Unified Text + Numeric Feature Pipeline
+
+Combines TF-IDF matrix with custom features using scipy.sparse.hstack for seamless model input.
+
+⚡ Deployment-Ready with Streamlit
+
+Integrated with a user-friendly Streamlit interface for real-time fraud prediction and insights.
 
 🛠️ Technologies Used
 
