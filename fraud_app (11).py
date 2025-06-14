@@ -20,6 +20,9 @@ from imblearn.over_sampling import SMOTE
 from scipy.sparse import hstack
 import matplotlib.pyplot as plt
 
+# --- PAGE CONFIG ---
+st.set_page_config(page_title="🎯 Fraud Job Detector", layout="wide")
+
 # --- SIDEBAR STYLING AND CONTENT ---
 st.markdown("""
     <style>
@@ -86,8 +89,7 @@ if st.sidebar.button("🚀 Analyze Now"):
     st.success("Analysis started!")
 
 
-# --- PAGE CONFIG ---
-st.set_page_config(page_title="🎯 Fraud Job Detector", layout="wide")
+
 
 # --- CUSTOM STYLING ---
 st.markdown("""
