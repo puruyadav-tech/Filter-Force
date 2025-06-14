@@ -29,16 +29,18 @@ Develop a system to classify job listings as fraudulent or genuine using structu
 ✅ SHAP plot for model explainability
 
 
-
 🛠️ Technologies Used
-Area	Tools/Libraries
-Data Handling	pandas, numpy
-Modeling	XGBoost, SMOTE
-NLP	TfidfVectorizer
-Evaluation	F1-score, precision-recall curve
-Visualization	matplotlib, seaborn, SHAP
-Web Dashboard	Streamlit
-Deployment	Streamlit Cloud
+
+
+| Area          | Tools/Libraries                      |
+| ------------- | ------------------------------------ |
+| Data Handling | `pandas`, `numpy`                    |
+| Modeling      | `XGBoost`, `SMOTE`                   |
+| NLP           | `TfidfVectorizer`                    |
+| Evaluation    | `F1-score`, `precision-recall` curve |
+| Visualization | `matplotlib`, `seaborn`, `SHAP`      |
+| Web Dashboard | `Streamlit`                          |
+| Deployment    | `Streamlit Cloud`                    |
 
 
 🧾 Setup Instructions
