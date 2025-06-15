@@ -211,6 +211,7 @@ st.sidebar.markdown("""
     }
     .css-1hynsf2 {
         color: #00a8ff !important;
+        font-size: 20px !important;
     }
     </style>
 """, unsafe_allow_html=True)
