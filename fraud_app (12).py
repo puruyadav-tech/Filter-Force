@@ -218,14 +218,15 @@ st.sidebar.markdown("""
 # --- HEADER ---
 st.markdown(
     """
-    <h1 style='text-align: center; color: white;'>🕵️‍♂️ AI-Powered Job Fraud Detection</h1>
-    <p style='text-align: center; color: white; font-size: 18px;'>
+    <h1 style='text-align: center; color: white; font-size: 60px;'>🕵️‍♂️ AI-Powered Job Fraud Detection</h1>
+    <p style='text-align: center; color: white; font-size: 24px;'>
         Detect potentially fraudulent job postings using intelligent machine learning
     </p>
-    <hr style='border: 1px solid #444;' />
+    <hr style='border: 1px solid #00AEEF;' />
     """,
     unsafe_allow_html=True
 )
+
 
 
 # --- DATA LOADING ---
