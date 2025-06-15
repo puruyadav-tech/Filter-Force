@@ -447,6 +447,11 @@ For each high-risk listing, an alert message is generated with:
    • Location
 
    • Fraud Probability (rounded to 2 decimal places)
+
+![image](https://github.com/user-attachments/assets/4f8d4581-b931-40a8-9736-d6fe2568b9a3) ![image](https://github.com/user-attachments/assets/a767b182-e109-4dfe-855a-e4958d417041) ![image](https://github.com/user-attachments/assets/43f4ac5a-84e0-4c29-9006-ee058cb1ad92)
+
+
+
    
 
 
