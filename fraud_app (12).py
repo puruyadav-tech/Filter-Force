@@ -232,7 +232,7 @@ st.markdown(
 
 
 # --- DATA LOADING ---
-@st.cache_data
+@st.cache_data(ttl=3600)
 def load_data():
     file_id = "1oxygynnHOAU3NU3S8xHRdBS9WA_K1E7y"
     url = f"https://drive.google.com/uc?id={file_id}"
@@ -246,7 +246,7 @@ def load_data():
     return train_df
 
 # --- DATA PREPARATION ---
-@st.cache_data
+@st.cache_data(ttl=3600)
 def prepare(df):
     df = df.copy()
     for col in ['title', 'description', 'requirements', 'company_profile']:
@@ -279,7 +279,7 @@ def prepare(df):
     return df
 
 # --- MODEL TRAINING ---
-@st.cache_resource
+@st.cache_resource(ttl=86400) 
 def train_model(train_df):
     if train_df.empty:
         st.warning("Training data not loaded. Model training skipped.")
