@@ -449,59 +449,159 @@ For each high-risk listing, an alert message is generated with:
    • Fraud Probability (rounded to 2 decimal places)
 
 
+
+
+   
+![image](https://github.com/user-attachments/assets/b051319d-e38e-452f-aa6a-876ac7f73648)
+
+
 F1 Score Optimization
+
 The F1 Score combines Precision and Recall into a single metric, making it ideal for imbalanced datasets like fraud detection where accuracy alone can be misleading.
+ ![image](https://github.com/user-attachments/assets/861f0e34-dfa7-4a36-a11f-25f8d9280c96)
 
-Formula:
-F
-1
- Score
-=
-2
-⋅
-Precision
-⋅
-Recall
-Precision
-+
-Recall
-F1 Score=2⋅ 
-Precision+Recall
-Precision⋅Recall
- 
-
-Threshold Analysis Results
-Key Findings:
 Threshold Analysis
-X-axis: Probability thresholds for classification (from 0 to 1)
+    • X-axis: Probability thresholds for classification (from 0 to 1)
 
-Y-axis: F1 Score achieved at each threshold
+    • Y-axis: F1 Score achieved at each threshold
 
-A blue curve shows how the F1 Score changes across different thresholds.
-A red dashed vertical line marks the best-performing threshold.
+• A blue curve shows how the F1 Score changes across different thresholds.
+• A red dashed vertical line marks the best-performing threshold.
 
 Key Results
-Best Threshold: 0.21
+• Best Threshold: 0.21
+        • Instead of the standard 0.5 threshold, our model performs best when classifying any instance with a fraud probability above 21% as fraudulent.
 
-Instead of the standard 0.5 threshold, our model performs best when classifying any instance with a fraud probability above 21% as fraudulent.
+• Peak F1 Score: ~0.81
 
-Peak F1 Score: ~0.81
-
-This is the highest achievable balance between precision and recall with our current model.l
+        • This is the highest achievable balance between precision and recall with our current model.l
 
 Why such a low threshold? 
 
-our model tends to predict conservative (low) probabilities even for actual fraud cases, so using a lower cutoff helps catch more fraudulent transactions while maintaining reasonable precision
+   • our model tends to predict conservative (low) probabilities even for actual fraud cases, so using a lower cutoff helps catch more fraudulent transactions while maintaining reasonable precision
 
 Implementation Impact
 
-This threshold optimization significantly improves model performance by:
+• This threshold optimization significantly improves model performance by:
 
-Increasing Recall - Catching more actual fraud cases
+      • Increasing Recall - Catching more actual fraud cases
 
-Maintaining Precision - Avoiding excessive false positives
+      • Maintaining Precision - Avoiding excessive false positives
 
-Maximizing F1 Score - Achieving optimal balance for our imbalanced dataset
+      • Maximizing F1 Score - Achieving optimal balance for our imbalanced dataset
+
+![image](https://github.com/user-attachments/assets/ee9e96b9-154b-4d95-a625-18ef6c54cd8e)
+
+Key Insights from the Fraud Probability Distribution
+
+1. Distribution Pattern:
+
+What This Graph Tells Us
+
+• X-axis: Fraud Probability
+The probability output by your model that a job posting is fraudulent (ranges from 0 to 1).
+
+Closer to 0 = more likely real
+Closer to 1 = more likely fraud
+
+• Y-axis: Frequency
+How many samples fall into each probability range/bin
+
+ • Most predictions clustered near 0 (legitimate jobs)
+
+ • Small cluster near 1.0 (fraudulent jobs)
+
+ • Sparse middle values indicate decisive model behavior
+
+2. Model Behavior:
+
+ • High confidence predictions - model rarely assigns intermediate probabilities (0.4-0.6)
+
+ • Strong feature separability - clear distinction between fraud and legitimate postings
+
+ •  The pattern reflects a class imbalance—fraudulent jobs are rare compared to legitimate ones.
+
+ • A smoothed KDE curve (red line) highlights the underlying distribution, confirming the two peaks (at 0 and 1).
+
+3. Practical Implications:
+
+ • Low threshold justified - setting threshold around 0.21 captures frauds in the right tail
+ 
+ • High threshold problematic - using 0.5+ would miss many actual frauds
+ 
+ • The model is reliable for the majority class (legitimate jobs), and also identifies true frauds at the far right.
+
+	
+	![image](https://github.com/user-attachments/assets/545a8fe4-de7b-485a-895a-c08da11b6b8c)
+
+
+	What This Pie Chart Shows
+Title: “Predicted Fake vs Real Job Listings”
+1. Prediction Breakdown:
+   
+    • 94.8% of job listings are predicted as real (light blue).
+
+    • 5.2% are predicted as fraudulent (salmon red).
+
+ 2. Class Imbalance:
+
+    • The chart reflects real-world data where most jobs are genuine.
+
+ 3. Fraud Detection Strategy:
+    
+   • 5.2% is significantly higher than the true base rate of fraud in most datasets (usually <2%), meaning your model is trying to err on the side of         caution, which is a good strategy in fraud detection.
+
+ 4. Practical Implication:
+
+• It’s likely catching more fraud at the cost of a few false positives, which is usually acceptable in fraud screening systems.
+• This cautious approach is typical and effective in fraud detection systems
+
+![image](https://github.com/user-attachments/assets/af1027a8-c404-43e0-82be-d48638e9dabc)
+
+1. Feature Importance Order:
+
+  • Features are listed top-to-bottom by their average impact on predictions (most important at the top).
+
+2. SHAP Value (X-axis):
+
+  • Positive SHAP values: Push prediction toward fraud (class = 1).
+
+  • Negative SHAP values: Push prediction toward real (class = 0).
+
+3. Dots (Individual Predictions):
+
+  • Each dot represents one job listing.
+
+  • Dot position shows how much that feature influenced the fraud prediction for that listing.
+
+4. Color (Feature Value):
+
+   • Red/pink = High feature value.
+
+   • Blue = Low feature value.
+
+5. Key Feature Insights:
+
+•  has_profile:
+
+           • Most influential feature.
+
+           • High value (red, likely “no profile”) strongly pushes toward fraud.
+
+           • Low value (blue, “has profile”) pushes toward real.
+
+           • word_count & desc_len:
+
+           • High values (red, longer descriptions) push toward real jobs.
+
+           • Low values (blue, short descriptions) push toward fraud.
+
+• Keyword Features (e.g., fun, goal, team, years):
+
+      • Words like “fun” and “goal” (red) tend to push toward fraud—possibly because fake jobs use vague, motivational language.
+
+      •  Words like “team,” “years,” and “solutions” push toward real—suggesting structured, corporate language signals legitimacy.
+
 
    
 
