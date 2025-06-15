@@ -216,7 +216,102 @@ These combined matrices are then used to train ML models like XGBoost or Random 
 
 ![image](https://github.com/user-attachments/assets/1ecbd0f9-25ef-4c36-b796-01609c9bc1d2)
 
+Handling Class Imbalance and Model Training
 
+1. Problem: Class Imbalance
+
+     • Fraudulent job postings are rare.
+
+     • This causes class imbalance — a major challenge in machine learning.
+
+     • A model that always predicts “not fraud” may achieve high accuracy but is useless.
+
+2. Solution: SMOTE (Synthetic Minority Oversampling Technique)
+
+ • SMOTE creates synthetic fraud examples by interpolating between real ones.
+
+ • This balances the dataset and helps the model learn fraud patterns more effectively.
+
+3. Train-Validation Split
+
+ • Dataset is split using train_test_split() with stratify=y to maintain class distribution.
+
+4. Model: XGBoost Classifier
+
+ • Chosen for its speed and accuracy in classification tasks.
+
+ • Key hyperparameters:
+
+     • n_estimators=200: Number of trees.
+
+     • max_depth=6: Controls model complexity to avoid overfitting.
+
+     • subsample & colsample_bytree: Randomly sample rows and features to enhance generalization.
+
+     • eval_metric='logloss': Metric to evaluate binary classification error.
+
+5. Training
+
+     • The model is trained on SMOTE-balanced data: X_res, y_res.
+
+ ![image](https://github.com/user-attachments/assets/f9454534-08d6-4d88-82a0-f31798dac96c)
+
+• Threshold Optimization for Better Performance
+
+1. Default Threshold Issue
+
+  • Most models use a default threshold of 0.5 for binary classification.
+
+  • On imbalanced datasets, this may not yield optimal results.
+
+2. Threshold Tuning
+
+   • Use precision_recall_curve to compute scores across all possible thresholds.
+
+   • Calculate F1 Score (harmonic mean of precision and recall) for each threshold.
+
+   • Select the best_threshold that maximizes F1 Score.
+
+3. Plot F1 vs Threshold
+
+• Helps visualize how F1 score changes with different classification thresholds.
+
+• Aids in selecting the optimal best_threshold.
+
+4. Final Predictions with Best Threshold
+
+• Apply best_threshold to the model's output probabilities.
+
+• Generate predictions for evaluation.
+
+5. Evaluate with classification_report()
+
+• Provides detailed performance metrics:
+
+    • Precision: Of all predicted frauds, how many were actually fraud?
+
+    • Recall: Of all actual frauds, how many did the model detect?
+
+    • F1 Score: Harmonic mean of precision and recall — balances false positives and false negatives.
+
+    • Support: Number of true instances in each class.
+
+6. Evaluate with confusion_matrix()
+
+  • Breaks down predictions into four categories:
+
+        • True Positives (TP) – Correctly predicted fraud cases.
+
+        • True Negatives (TN) – Correctly predicted genuine jobs.
+
+        • False Positives (FP) – Genuine jobs incorrectly labeled as fraud.
+
+        • False Negatives (FN) – Fraud cases the model failed to detect
+        
+• This helps us understand model performance beyond accuracy and ensures it catches fraud with minimal false alarms.
+
+
+ 
 
 
 
