@@ -448,9 +448,60 @@ For each high-risk listing, an alert message is generated with:
 
    • Fraud Probability (rounded to 2 decimal places)
 
-![image](https://github.com/user-attachments/assets/4f8d4581-b931-40a8-9736-d6fe2568b9a3) ![image](https://github.com/user-attachments/assets/a767b182-e109-4dfe-855a-e4958d417041) ![image](https://github.com/user-attachments/assets/43f4ac5a-84e0-4c29-9006-ee058cb1ad92)
 
+F1 Score Optimization
+The F1 Score combines Precision and Recall into a single metric, making it ideal for imbalanced datasets like fraud detection where accuracy alone can be misleading.
 
+Formula:
+F
+1
+ Score
+=
+2
+⋅
+Precision
+⋅
+Recall
+Precision
++
+Recall
+F1 Score=2⋅ 
+Precision+Recall
+Precision⋅Recall
+ 
+
+Threshold Analysis Results
+Key Findings:
+Threshold Analysis
+X-axis: Probability thresholds for classification (from 0 to 1)
+
+Y-axis: F1 Score achieved at each threshold
+
+A blue curve shows how the F1 Score changes across different thresholds.
+A red dashed vertical line marks the best-performing threshold.
+
+Key Results
+Best Threshold: 0.21
+
+Instead of the standard 0.5 threshold, our model performs best when classifying any instance with a fraud probability above 21% as fraudulent.
+
+Peak F1 Score: ~0.81
+
+This is the highest achievable balance between precision and recall with our current model.l
+
+Why such a low threshold? 
+
+our model tends to predict conservative (low) probabilities even for actual fraud cases, so using a lower cutoff helps catch more fraudulent transactions while maintaining reasonable precision
+
+Implementation Impact
+
+This threshold optimization significantly improves model performance by:
+
+Increasing Recall - Catching more actual fraud cases
+
+Maintaining Precision - Avoiding excessive false positives
+
+Maximizing F1 Score - Achieving optimal balance for our imbalanced dataset
 
    
 
