@@ -489,6 +489,10 @@ Implementation Impact
       • Maintaining Precision - Avoiding excessive false positives
 
       • Maximizing F1 Score - Achieving optimal balance for our imbalanced dataset
+      
+![image](https://github.com/user-attachments/assets/782894e4-3560-4985-a43c-a43a861e869d)
+
+
 
 ![image](https://github.com/user-attachments/assets/ee9e96b9-154b-4d95-a625-18ef6c54cd8e)
 
@@ -532,7 +536,8 @@ How many samples fall into each probability range/bin
  • The model is reliable for the majority class (legitimate jobs), and also identifies true frauds at the far right.
 
 	
-	![image](https://github.com/user-attachments/assets/545a8fe4-de7b-485a-895a-c08da11b6b8c)
+![image](https://github.com/user-attachments/assets/3f133980-47c0-4866-81ce-2f6f7eb66323)
+
 
 
 	What This Pie Chart Shows
