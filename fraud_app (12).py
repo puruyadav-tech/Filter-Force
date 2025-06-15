@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1Xa9IT3yQfQa6fl9GZlMPAGdHdPaz4Qu8
 """
 
-[media pointer="file-service://file-VsapUFsSz5ywNSfwgKMk3g"]
+
 why this white on uper side make it same with background and TEXT should be black and highlighted
 
 # -*- coding: utf-8 -*-
