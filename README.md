@@ -492,29 +492,29 @@ Implementation Impact
       
 ![image](https://github.com/user-attachments/assets/782894e4-3560-4985-a43c-a43a861e869d)
 
-📌 Threshold Tuning
-• To optimize fraud detection, we tuned the classification threshold instead of using the default 0.5. The best performance was achieved at threshold = 0.21, giving the highest F1 Score of 0.8109 — effectively balancing precision and recall.
+•  Threshold Tuning
+  • To optimize fraud detection, we tuned the classification threshold instead of using the default 0.5. The best performance was achieved at threshold = 0.21, giving the highest F1 Score of 0.8109 — effectively balancing precision and recall.
 
-Threshold	F1 Score
-0.10	        0.7230
-0.21	        0.8109 ✅
-0.25–0.50	~0.78–0.79
+     Threshold	         F1 Score
+      0.10	           0.7230
+      0.21	           0.8109 
+    0.25–0.50	         ~0.78–0.79
 
  • Final Performance (Validation Set)
  
- Metric              Value          Interpretation                                    
+ Metric                  Value                     Interpretation                                    
   
-• Accuracy             0.98         Overall correct predictions.                      
-• Precision (Fraud)    0.78         78% of fraud predictions were correct.            
-• Recall (Fraud)       0.85         85% of actual frauds were detected.               
-• F1 Score (Fraud)     0.81         Balanced metric of fraud detection.               
-• Macro Avg (F1)       0.90         Treats both classes equally.                      
-• Weighted Avg (F1     0.98         Reflects performance considering class imbalance. 
+• Accuracy                 0.98                        Overall correct predictions.                      
+• Precision (Fraud)        0.78                        78% of fraud predictions were correct.            
+• Recall (Fraud)           0.85                        85% of actual frauds were detected.               
+• F1 Score (Fraud)         0.81                        Balanced metric of fraud detection.               
+• Macro Avg (F1)           0.90                        Treats both classes equally.                      
+• Weighted Avg (F1         0.98                        Reflects performance considering class imbalance. 
 
 • Confusion Matrix
-                  Predicted Real	       Predicted Fraud
-Actually Real	   2688 	               34  (False Positives)
-Actually Fraud	    21  (False Negatives)	118 
+                       Predicted Real	                 Predicted Fraud
+Actually Real	         2688 	                          34 (False Positives)
+Actually Fraud	        21 (False Negatives)	           118 
 
 •  Key Insights
     • Only 21 fraud cases were missed (false negatives).
