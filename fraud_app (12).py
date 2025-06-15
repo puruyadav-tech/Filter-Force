@@ -92,10 +92,10 @@ st.markdown("""
 
 st.sidebar.markdown("<div class='sidebar-header'>🔍 Sidebar Menu</div>", unsafe_allow_html=True)
 
-with st.sidebar.expander("📤 Upload Data", expanded=True):
-    uploaded_file = st.file_uploader("Upload a CSV file for prediction", type="csv")
-    if st.button("🚀 Analyze Now"):
-        st.success("Analysis started!")
+# with st.sidebar.expander("📤 Upload Data", expanded=True):
+#     uploaded_file = st.file_uploader("Upload a CSV file for prediction", type="csv")
+#     if st.button("🚀 Analyze Now"):
+#         st.success("Analysis started!")
 
 with st.sidebar.expander("⚙️ Settings"):
     st.checkbox("Enable Notifications")
@@ -306,7 +306,10 @@ if not train_df.empty:
 model, tfidf, best_threshold = train_model(train_df)
 
 # --- SIDEBAR UPLOAD ---
-uploaded_file = st.sidebar.file_uploader("📤 Upload a CSV file for prediction", type="csv")
+st.markdown("## 📤 Upload a CSV File to Detect Fraudulent Jobs")
+uploaded_file = st.file_uploader("Upload CSV for Prediction", type="csv")
+analyze_btn = st.button("🚀 Analyze Now")
+
 if uploaded_file is not None:
     try:
         test_df = pd.read_csv(uploaded_file)
