@@ -81,3 +81,7 @@ Integrated with a user-friendly Streamlit interface for real-time fraud predicti
 
 
 🧾 Setup Instructions
+
+
+![image](https://github.com/user-attachments/assets/d22dcd1c-7056-4c9f-9bf9-e1f17e93da6a)
+
