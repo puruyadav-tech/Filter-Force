@@ -112,7 +112,7 @@ Integrated with a user-friendly Streamlit interface for real-time fraud predicti
 
 ![image](https://github.com/user-attachments/assets/729bac06-9b45-4aa4-90cf-bc0602c47fcd)
 
-🧹 Dataset Preparation & Feature Engineering
+ Dataset Preparation & Feature Engineering
 To ensure robust and consistent model training, we preprocess and enrich the dataset through a series of thoughtful transformations:
 
 1. Safe Copy of the Data
@@ -310,10 +310,144 @@ Handling Class Imbalance and Model Training
         
 • This helps us understand model performance beyond accuracy and ensures it catches fraud with minimal false alarms.
 
+![image](https://github.com/user-attachments/assets/eb6b775d-a080-4fea-837d-a84d0cc9db62)
+
+Now that our model is trained and fine-tuned, we use it to predict the fraud probability of each job listing in the test dataset.
+
+1. Use the Trained Model to Predict Fraud Probabilities:
+
+• model.predict_proba(X_test_combined)[:, 1]
+  → Returns the probability of class 1 (fraud) for each job listing in the test set.
+
+2. Store Probabilities:
+
+• Save the output as a new column:
+    test_df['fraud_probability']
+
+3. Convert Probabilities to Binary Predictions:
+
+   • Apply the previously selected best_threshold:
+
+        • If probability ≥ threshold → fraud_predicted = 1 (high likelihood of fraud)
+
+        • If probability < threshold → fraud_predicted = 0 (likely genuine)
+
+  • Save this as:
+   test_df['fraud_predicted']
+
+4. Result:
+
+  • A clean column with 0s and 1s representing model predictions for fraud.
+
+ 📊 Visualizing Model Confidence
+5. Histogram of Fraud Probabilities:
+
+      • Plot all values in test_df['fraud_probability']
+
+      • Peaks near 0 → Model is confident many jobs are real.
+
+      • Peaks near 1 → Model has high confidence in fraud predictions.
+
+6. KDE Line (Smooth Curve):
+
+     • Added to the histogram to better visualize the shape of the probability distribution.
+
+Visualizing Fraud vs Real Predictions
+
+ 7. Pie Chart of Predicted Labels:
+
+     • Use values from test_df['fraud_predicted'] to count real vs fake predictions.
+
+     • Provides a clear view of the percentage of job listings flagged as fake.
+
+• Helps decision-makers or investigators understand how widespread fraud is in the test dataset according to the model.
+
+
+![image](https://github.com/user-attachments/assets/2be9ef58-bd85-43cb-9967-d0ec6acd303e)
+
+
+✅ Why SHAP?  
+
+• SHAP (SHapley Additive exPlanations) is a method from game theory used to explain individual predictions made by machine learning models. It assigns each feature a contribution score (positive or negative) toward the final prediction.
+
+1. Dense Conversion for SHAP Compatibility
+   
+  • SHAP requires input data in dense format.
+  → We convert a subset of the training data (e.g., X_res[:100]) using .toarray().
+
+2. SHAP Explainer Setup
+   
+ • We create a SHAP explainer using the trained XGBoost model and the dense data.
+ → This explainer understands the model logic and computes contribution scores.
+
+3. SHAP Values Computation
+SHAP values tell how much each feature pushes a prediction toward class 1 (fraud) or class 0 (non-fraud).
+
+4. Feature Names
+   
+ • We combine:
+
+         • Top 5000 TF-IDF features from job descriptions and titles
+
+         • Custom-engineered features like:
+
+         • desc_len
+
+         • word_count
+
+         • num_digits_in_title
+
+         • has_profile
+
+         • suspicious_terms
+
+         • free_email
+
+5. Summary Plot Visualization
+
+We generate a SHAP summary plot which shows:
+
+ • Most influential features
+
+ • Direction (does a feature increase or decrease fraud risk?)
+
+ • Distribution and strength of these features across samp
 
  
+ ![image](https://github.com/user-attachments/assets/855b0c7e-2df2-4199-85df-6ec4b8735bfa)
 
+High-Risk Job Listings Alert
 
+• While your model predicts all fraud probabilities, not every “fraudulent” prediction has the same confidence. A job predicted at 0.51 might just barely cross the threshold — but one predicted at 0.95 is likely very suspiciou
+
+1. Why This Matters
+   
+Jobs with very high fraud probability (e.g., 0.95) are more likely to be genuinely fraudulent and may require:
+
+   • Human verification or moderation
+
+   • Platform filtering/blocking
+
+   • Alerts to internal teams
+
+ 3. Implementation Overview
+    
+• Thresholding
+A cut-off of 0.80 is used to flag high-confidence frauds.
+(This value can be adjusted based on acceptable risk tolerance.)
+
+• Filtering
+From the test dataset, all listings with fraud_probability ≥ 0.8 are filtered into a separate DataFrame.
+
+• Formatted Alert
+For each high-risk listing, an alert message is generated with:
+
+   • Title
+
+   • Location
+
+   • Fraud Probability (rounded to 2 decimal places)
+   
 
 
 
