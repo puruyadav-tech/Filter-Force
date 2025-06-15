@@ -361,8 +361,8 @@ if uploaded_file is not None:
             st.warning("Model not loaded. Cannot generate predictions.")
     except Exception as e:
         st.error(f"Error processing uploaded file: {e}")
-else:
-    st.info("👈 Upload a CSV file from the sidebar to begin analysis.")
+# else:
+#     st.info("👈 Upload a CSV file from the sidebar to begin analysis.")
 
 # --- WHY CHOOSE OUR AI SOLUTION SECTION ---
 st.markdown("---")
