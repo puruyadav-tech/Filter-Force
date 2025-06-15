@@ -698,6 +698,16 @@ This notebook includes model training with TF-IDF, SMOTE, XGBoost, and evaluatio
 
 
 
+since we have to speed up the video in order to compressed to 8mins.so we kindly request to pls watch this video at speed 0.5x for better viewing experience.pls consider our request as we have put enormous amount of work into completion of this project
+
+
+🎥 [Watch the presentation video]
+
+(https://youtu.be/0UAbC7MksfM) — Recommended speed: 0.5x for the best viewing experience.
+
+
+
+
 
 
    
