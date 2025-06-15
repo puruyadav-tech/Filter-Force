@@ -463,6 +463,8 @@ For each high-risk listing, an alert message is generated with:
 
 
 
+📨 OUTPUT BASED ON SAMPLE INPUT
+
 
    
 ![image](https://github.com/user-attachments/assets/b051319d-e38e-452f-aa6a-876ac7f73648)
@@ -658,8 +660,23 @@ Title: “Predicted Fake vs Real Job Listings”
       • Words like “fun” and “goal” (red) tend to push toward fraud—possibly because fake jobs use vague, motivational language.
 
       •  Words like “team,” “years,” and “solutions” push toward real—suggesting structured, corporate language signals legitimacy.
+      
 
+ 🚀 Live Demo
 
+• [Click here to open the Streamlit App](https://fraud-detector-app-cgr9btenw5tzsp72fpv2gu.streamlit.app/)
+
+• Features
+
+      • Fraud Detection  using XGBoost, TF-IDF, and SMOTE
+      • Interactive UI Design built with Streamlit
+      • Custom Threshold Slider to tune sensitivity
+      • Live Metrics Dashboard with precision, recall, F1-score, and confusion matrix
+      • Search & Filter functionality for job posts
+      • Visualizations Pie charts and histograms for data insights
+      • Downloadable Results in CSV format
+
+THIS IS THE Also the link:-
 
 https://fraud-detector-app-cgr9btenw5tzsp72fpv2gu.streamlit.app/
 
