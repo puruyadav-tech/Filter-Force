@@ -93,7 +93,9 @@ st.markdown("""
 st.sidebar.markdown("<div class='sidebar-header'>🔍 Sidebar Menu</div>", unsafe_allow_html=True)
 
 with st.sidebar.expander("📤 Upload Data", expanded=True):
-    st.file_uploader("Upload a CSV file for prediction", type="csv")
+    uploaded_file = st.file_uploader("Upload a CSV file for prediction", type="csv")
+    if st.button("🚀 Analyze Now"):
+        st.success("Analysis started!")
 
 with st.sidebar.expander("⚙️ Settings"):
     st.checkbox("Enable Notifications")
@@ -118,8 +120,6 @@ st.sidebar.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-if st.sidebar.button("🚀 Analyze Now"):
-    st.success("Analysis started!")
 
 
 
