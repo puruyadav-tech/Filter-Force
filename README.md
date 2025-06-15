@@ -680,6 +680,20 @@ THIS IS THE Also the link:-
 
 https://fraud-detector-app-cgr9btenw5tzsp72fpv2gu.streamlit.app/
 
+photos of app we have designed
+
+ UI DESIGN OF THE APP
+ 
+ ![image](https://github.com/user-attachments/assets/03fff37d-a284-44f0-adc1-66a669112b80)
+
+ output after browsing the file
+ 
+
+ ![image](https://github.com/user-attachments/assets/c1d87a3e-fd71-43e6-a154-23c052c4069a)
+
+
+ ![image](https://github.com/user-attachments/assets/f8836adc-f8bc-472e-858c-f6070917cc9c)
+
 
 
 ## 📄 fraud_app (12).py
@@ -704,6 +718,8 @@ since we have to speed up the video in order to compressed to 8mins.so we kindly
 🎥 [Watch the presentation video]
 
 (https://youtu.be/0UAbC7MksfM) — Recommended speed: 0.5x for the best viewing experience.
+
+
 
 
 
