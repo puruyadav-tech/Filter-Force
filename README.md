@@ -681,6 +681,25 @@ THIS IS THE Also the link:-
 https://fraud-detector-app-cgr9btenw5tzsp72fpv2gu.streamlit.app/
 
 
+
+## 📄 fraud_app (12).py
+
+This script contains the complete Streamlit code for deploying the fraud detection app, including model loading, threshold tuning, performance metrics, and interactive UI components.
+
+
+
+
+## 📔 Colab Notebook
+
+fraud_app.ipynb
+ you can excess the code from here 
+
+This notebook includes model training with TF-IDF, SMOTE, XGBoost, and evaluation before deployment.
+
+
+
+
+
    
 
 
