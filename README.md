@@ -115,38 +115,109 @@ Integrated with a user-friendly Streamlit interface for real-time fraud predicti
 🧹 Dataset Preparation & Feature Engineering
 To ensure robust and consistent model training, we preprocess and enrich the dataset through a series of thoughtful transformations:
 
-1. ✅ Safe Copy of the Data
+1. Safe Copy of the Data
 We begin by copying the input DataFrame to avoid modifying the original data. This is a best practice for all preprocessing pipelines.
 
-2. 🧾 Validate and Clean Text Columns
+2. Validate and Clean Text Columns
 We ensure key textual columns (title, description, requirements, company_profile) exist. If missing, they're created and filled with empty strings to avoid errors during vectorization.
 
-3. 📧 Clean the Email Column
+3. Clean the Email Column
 If the email field exists, we replace all missing values with blank strings to maintain formatting and prevent errors during feature extraction.
 
-4. 📚 Merge Text for TF-IDF
+4. Merge Text for TF-IDF
 We combine all main text fields into a unified full_text column, which is used to generate TF-IDF features. This leverages the entire job listing content for better text-based learning.
 
-5. 🧠 Generate Custom Features
-We engineer several insightful features to detect fraud patterns:
+5. Generate Custom Features
+• We engineer several insightful features to detect fraud patterns:
 
-desc_len: Length of the job description (in characters).
+• desc_len: Length of the job description (in characters).
 
-word_count: Number of words in the description.
+• word_count: Number of words in the description.
 
-num_digits_in_title: Count of numerical digits in the job title (e.g., “Earn $5000”).
+• num_digits_in_title: Count of numerical digits in the job title (e.g., “Earn $5000”).
 
-has_profile: Boolean flag — does the company provide a profile?
+• has_profile: Boolean flag — does the company provide a profile?
 
-suspicious_terms: Checks for keywords like "bitcoin", "transfer", "click", "money", etc., common in scams.
+• suspicious_terms: Checks for keywords like "bitcoin", "transfer", "click", "money", etc., common in scams.
 
-6. 📬 Email-Based Features
+6. Email-Based Features
 email_domain: Extracted from the email (e.g., gmail.com, company.com).
 
 free_email: Flags whether the domain belongs to a free provider (like gmail, yahoo, etc.), often used in fake listings.
 
-7. 🔄 Consistency Across Datasets
+7.  Consistency Across Datasets
 We apply the same transformation function to both training and test datasets. This guarantees consistent features during model training and inference.
+
+
+![image](https://github.com/user-attachments/assets/a56f1f07-2b84-4faa-984f-5c485883da3a)
+
+1. Split the dataset:
+
+• X: Input features from the training data.
+
+• y: Output labels (0 = Real, 1 = Fraudulent).
+
+• X_test: Input features from the test data (labels are not available).
+
+2. Features in X:
+
+• Text feature: Combined text column (formed by concatenating title, description, requirements, company_profile).
+
+• Handcrafted numeric features:
+
+• desc_len: Number of characters in the job description.
+
+• word_count: Number of words in the description.
+
+• num_digits_in_title: Number of digits in the job title.
+
+• has_profile: Binary flag indicating presence of a company profile.
+
+• suspicious_terms: Binary flag if scammy terms like money, bitcoin exist.
+
+• free_email: Binary flag for free email domains (e.g., gmail.com).
+
+3.  TF-IDF Vectorization
+
+• To handle text data, we use TF-IDF (Term Frequency-Inverse Document Frequency) — a statistical method to evaluate how important a word is in a document relative to the entire corpus 
+
+4. Configuration:
+
+• max_features = 5000: Use the 5000 most informative words.
+
+• stop_words = 'english': Removes common unimportant words (e.g., the, and, is).
+
+5. Apply TF-IDF:
+
+• On X['text'] → creates X_tfidf (sparse matrix).
+
+• On X_test['text'] → creates X_test_tfidf (using the same vocabulary as training).
+
+6. Combining All Features
+
+The TF-IDF matrix (text features),
+
+With 6 handcrafted numerical features (from feature engineering).
+
+We use scipy.sparse.hstack() to horizontally stack these two sets of features into one big feature matri.
+
+7. Final matrices:
+
+• X_combined: Final feature set for training.
+
+• X_test_combined: Final feature set for test predictions.
+
+This combined matrix is now ready to feed into machine learning models like XGBoost  giving the model both:
+These combined matrices are then used to train ML models like XGBoost or Random Forest, benefiting from:
+
+• Rich semantic content (from text)
+
+• Strong rule-based signals (from numeric features
+
+![image](https://github.com/user-attachments/assets/1ecbd0f9-25ef-4c36-b796-01609c9bc1d2)
+
+
+
 
 
 
