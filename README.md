@@ -639,6 +639,10 @@ Title: “Predicted Fake vs Real Job Listings”
       •  Words like “team,” “years,” and “solutions” push toward real—suggesting structured, corporate language signals legitimacy.
 
 
+
+https://fraud-detector-app-cgr9btenw5tzsp72fpv2gu.streamlit.app/
+
+
    
 
 
