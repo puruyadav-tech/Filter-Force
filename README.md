@@ -1,12 +1,18 @@
 # fraud-detector-app
 🔍 Job Fraud Detector | Anveshan Hackathon Project An ML-powered Streamlit web app that detects fake job listings using natural language processing, feature engineering, and XGBoost. Includes real-time predictions, SHAP explanations, search, filtering, and CSV export — built to protect job seekers from online scams
-https://drive.google.com/file/d/1oxygynnHOAU3NU3S8xHRdBS9WA_K1E7y/view?usp=sharing
+
+training data csv:- https://drive.google.com/file/d/1oxygynnHOAU3NU3S8xHRdBS9WA_K1E7y/view?usp=sharing
+
 
  Fraud Detector: Smart Job Scam Detection System
+
+
 🧠 Project Overview
 Online job platforms are frequently targeted by scammers. These fake job listings waste applicants’ time and put their personal information at risk.
 
+
 This project builds a machine learning pipeline that automatically detects fraudulent job listings and presents insights in a Streamlit-powered interactive dashboard.
+
 
 🎯 Problem Statement
 Develop a system to classify job listings as fraudulent or genuine using structured and unstructured data. Display predictions and insights in an intuitive dashboard.
@@ -17,20 +23,21 @@ Classifies job listings as real or fake using advanced machine learning techniqu
 🧠 Hybrid Feature Engineering
 Combines TF-IDF text vectors with structured numeric features:
 
--Description length & word count
+• Description length & word count
 
--Suspicious keywords (e.g., money, bitcoin)
+• Suspicious keywords (e.g., money, bitcoin)
 
--Free email domain indicators (e.g., gmail.com, yahoo.com)
+• Free email domain indicators (e.g., gmail.com, yahoo.com)
 
--Digit count in job titles
+• Digit count in job titles
 
 🌲 XGBoost Classifier for Accuracy & Speed
 
-Leverages the power of XGBoost — a high-performance gradient boosting algorithm — for fast training and accurate predictions.
+• Leverages the power of XGBoost — a high-performance gradient boosting algorithm — for fast training and accurate predictions.
 
 ⚖️ Class Imbalance Handling with SMOTE
-Uses SMOTE oversampling to improve detection of rare fraudulent cases without overfitting.
+
+• Uses SMOTE oversampling to improve detection of rare fraudulent cases without overfitting.
 
 🧪 F1-Optimized Threshold Tuning
 
@@ -38,15 +45,15 @@ Dynamically selects the best threshold using precision-recall curve to maximize 
 
 📊 Visual Analytics Dashboard
 
--Histogram of fraud probabilities
+• Histogram of fraud probabilities
 
--Pie chart of predicted real vs. fake listings
+• Pie chart of predicted real vs. fake listings
 
--Threshold vs. F1-score visualization
+• Threshold vs. F1-score visualization
 
--SHAP summary plots for feature importance
+• SHAP summary plots for feature importance
 
-🔍 Explainable AI with SHAP
+• Explainable AI with SHAP
 
 -Visualize top contributing features
 
@@ -116,31 +123,34 @@ Integrated with a user-friendly Streamlit interface for real-time fraud predicti
 To ensure robust and consistent model training, we preprocess and enrich the dataset through a series of thoughtful transformations:
 
 1. Safe Copy of the Data
-We begin by copying the input DataFrame to avoid modifying the original data. This is a best practice for all preprocessing pipelines.
+• We begin by copying the input DataFrame to avoid modifying the original data. This is a best practice for all preprocessing pipelines.
 
 2. Validate and Clean Text Columns
-We ensure key textual columns (title, description, requirements, company_profile) exist. If missing, they're created and filled with empty strings to avoid errors during vectorization.
+• We ensure key textual columns (title, description, requirements, company_profile) exist. If missing, they're created and filled with empty strings to avoid errors during vectorization.
 
 3. Clean the Email Column
-If the email field exists, we replace all missing values with blank strings to maintain formatting and prevent errors during feature extraction.
+• If the email field exists, we replace all missing values with blank strings to maintain formatting and prevent errors during feature extraction.
 
 4. Merge Text for TF-IDF
+
 We combine all main text fields into a unified full_text column, which is used to generate TF-IDF features. This leverages the entire job listing content for better text-based learning.
 
 5. Generate Custom Features
-• We engineer several insightful features to detect fraud patterns:
+   
+       • We engineer several insightful features to detect fraud patterns:
 
-• desc_len: Length of the job description (in characters).
+       • desc_len: Length of the job description (in characters).
 
-• word_count: Number of words in the description.
+        • word_count: Number of words in the description.
 
-• num_digits_in_title: Count of numerical digits in the job title (e.g., “Earn $5000”).
+       • num_digits_in_title: Count of numerical digits in the job title (e.g., “Earn $5000”).
 
-• has_profile: Boolean flag — does the company provide a profile?
+       • has_profile: Boolean flag — does the company provide a profile?
 
-• suspicious_terms: Checks for keywords like "bitcoin", "transfer", "click", "money", etc., common in scams.
+       • suspicious_terms: Checks for keywords like "bitcoin", "transfer", "click", "money", etc., common in scams.
 
 6. Email-Based Features
+   
 email_domain: Extracted from the email (e.g., gmail.com, company.com).
 
 free_email: Flags whether the domain belongs to a free provider (like gmail, yahoo, etc.), often used in fake listings.
@@ -153,29 +163,29 @@ We apply the same transformation function to both training and test datasets. Th
 
 1. Split the dataset:
 
-• X: Input features from the training data.
+       • X: Input features from the training data.
 
-• y: Output labels (0 = Real, 1 = Fraudulent).
+       • y: Output labels (0 = Real, 1 = Fraudulent).
 
-• X_test: Input features from the test data (labels are not available).
+       • X_test: Input features from the test data (labels are not available).
 
 2. Features in X:
 
-• Text feature: Combined text column (formed by concatenating title, description, requirements, company_profile).
+       • Text feature: Combined text column (formed by concatenating title, description, requirements, company_profile).
 
-• Handcrafted numeric features:
+       • Handcrafted numeric features:
 
-• desc_len: Number of characters in the job description.
+       • desc_len: Number of characters in the job description.
 
-• word_count: Number of words in the description.
+       • word_count: Number of words in the description.
 
-• num_digits_in_title: Number of digits in the job title.
+       • num_digits_in_title: Number of digits in the job title.
 
-• has_profile: Binary flag indicating presence of a company profile.
+       • has_profile: Binary flag indicating presence of a company profile.
 
-• suspicious_terms: Binary flag if scammy terms like money, bitcoin exist.
+       • suspicious_terms: Binary flag if scammy terms like money, bitcoin exist.
 
-• free_email: Binary flag for free email domains (e.g., gmail.com).
+       • free_email: Binary flag for free email domains (e.g., gmail.com).
 
 3.  TF-IDF Vectorization
 
@@ -183,15 +193,15 @@ We apply the same transformation function to both training and test datasets. Th
 
 4. Configuration:
 
-• max_features = 5000: Use the 5000 most informative words.
+       • max_features = 5000: Use the 5000 most informative words.
 
-• stop_words = 'english': Removes common unimportant words (e.g., the, and, is).
+       • stop_words = 'english': Removes common unimportant words (e.g., the, and, is).
 
 5. Apply TF-IDF:
 
-• On X['text'] → creates X_tfidf (sparse matrix).
+       • On X['text'] → creates X_tfidf (sparse matrix).
 
-• On X_test['text'] → creates X_test_tfidf (using the same vocabulary as training).
+       • On X_test['text'] → creates X_test_tfidf (using the same vocabulary as training).
 
 6. Combining All Features
 
@@ -203,42 +213,44 @@ We use scipy.sparse.hstack() to horizontally stack these two sets of features in
 
 7. Final matrices:
 
-• X_combined: Final feature set for training.
+       • X_combined: Final feature set for training.
 
-• X_test_combined: Final feature set for test predictions.
+       • X_test_combined: Final feature set for test predictions.
 
-This combined matrix is now ready to feed into machine learning models like XGBoost  giving the model both:
+• This combined matrix is now ready to feed into machine learning models like XGBoost  giving the model both:
+
+
 These combined matrices are then used to train ML models like XGBoost or Random Forest, benefiting from:
 
-• Rich semantic content (from text)
+    • Rich semantic content (from text)
 
-• Strong rule-based signals (from numeric features
+    • Strong rule-based signals (from numeric features
 
 ![image](https://github.com/user-attachments/assets/1ecbd0f9-25ef-4c36-b796-01609c9bc1d2)
 
-Handling Class Imbalance and Model Training
+• Handling Class Imbalance and Model Training
 
 1. Problem: Class Imbalance
 
-     • Fraudulent job postings are rare.
+       • Fraudulent job postings are rare.
 
-     • This causes class imbalance — a major challenge in machine learning.
+       • This causes class imbalance — a major challenge in machine learning.
 
-     • A model that always predicts “not fraud” may achieve high accuracy but is useless.
+       • A model that always predicts “not fraud” may achieve high accuracy but is useless.
 
 2. Solution: SMOTE (Synthetic Minority Oversampling Technique)
 
- • SMOTE creates synthetic fraud examples by interpolating between real ones.
+       • SMOTE creates synthetic fraud examples by interpolating between real ones.
 
- • This balances the dataset and helps the model learn fraud patterns more effectively.
+       • This balances the dataset and helps the model learn fraud patterns more effectively.
 
 3. Train-Validation Split
 
- • Dataset is split using train_test_split() with stratify=y to maintain class distribution.
+       • Dataset is split using train_test_split() with stratify=y to maintain class distribution.
 
 4. Model: XGBoost Classifier
 
- • Chosen for its speed and accuracy in classification tasks.
+       • Chosen for its speed and accuracy in classification tasks.
 
  • Key hyperparameters:
 
@@ -260,29 +272,29 @@ Handling Class Imbalance and Model Training
 
 1. Default Threshold Issue
 
-  • Most models use a default threshold of 0.5 for binary classification.
+       • Most models use a default threshold of 0.5 for binary classification.
 
-  • On imbalanced datasets, this may not yield optimal results.
+        • On imbalanced datasets, this may not yield optimal results.
 
 2. Threshold Tuning
 
-   • Use precision_recall_curve to compute scores across all possible thresholds.
+       • Use precision_recall_curve to compute scores across all possible thresholds.
 
-   • Calculate F1 Score (harmonic mean of precision and recall) for each threshold.
+       • Calculate F1 Score (harmonic mean of precision and recall) for each threshold.
 
-   • Select the best_threshold that maximizes F1 Score.
+       • Select the best_threshold that maximizes F1 Score.
 
 3. Plot F1 vs Threshold
 
-• Helps visualize how F1 score changes with different classification thresholds.
+       • Helps visualize how F1 score changes with different classification thresholds.
 
-• Aids in selecting the optimal best_threshold.
+       • Aids in selecting the optimal best_threshold.
 
 4. Final Predictions with Best Threshold
 
-• Apply best_threshold to the model's output probabilities.
+       • Apply best_threshold to the model's output probabilities.
 
-• Generate predictions for evaluation.
+       • Generate predictions for evaluation.
 
 5. Evaluate with classification_report()
 
@@ -316,13 +328,13 @@ Now that our model is trained and fine-tuned, we use it to predict the fraud pro
 
 1. Use the Trained Model to Predict Fraud Probabilities:
 
-• model.predict_proba(X_test_combined)[:, 1]
-  → Returns the probability of class 1 (fraud) for each job listing in the test set.
+        • model.predict_proba(X_test_combined)[:, 1]
+        → Returns the probability of class 1 (fraud) for each job listing in the test set.
 
 2. Store Probabilities:
 
-• Save the output as a new column:
-    test_df['fraud_probability']
+       • Save the output as a new column:
+          test_df['fraud_probability']
 
 3. Convert Probabilities to Binary Predictions:
 
@@ -350,15 +362,15 @@ Now that our model is trained and fine-tuned, we use it to predict the fraud pro
 
 6. KDE Line (Smooth Curve):
 
-     • Added to the histogram to better visualize the shape of the probability distribution.
+       • Added to the histogram to better visualize the shape of the probability distribution.
 
-Visualizing Fraud vs Real Predictions
+• Visualizing Fraud vs Real Predictions
 
  7. Pie Chart of Predicted Labels:
 
-     • Use values from test_df['fraud_predicted'] to count real vs fake predictions.
+        • Use values from test_df['fraud_predicted'] to count real vs fake predictions.
 
-     • Provides a clear view of the percentage of job listings flagged as fake.
+        • Provides a clear view of the percentage of job listings flagged as fake.
 
 • Helps decision-makers or investigators understand how widespread fraud is in the test dataset according to the model.
 
@@ -366,24 +378,25 @@ Visualizing Fraud vs Real Predictions
 ![image](https://github.com/user-attachments/assets/2be9ef58-bd85-43cb-9967-d0ec6acd303e)
 
 
-✅ Why SHAP?  
+• Why SHAP?  
 
 • SHAP (SHapley Additive exPlanations) is a method from game theory used to explain individual predictions made by machine learning models. It assigns each feature a contribution score (positive or negative) toward the final prediction.
 
 1. Dense Conversion for SHAP Compatibility
    
-  • SHAP requires input data in dense format.
-  → We convert a subset of the training data (e.g., X_res[:100]) using .toarray().
+       • SHAP requires input data in dense format.
+       → We convert a subset of the training data (e.g., X_res[:100]) using .toarray().
 
 2. SHAP Explainer Setup
    
- • We create a SHAP explainer using the trained XGBoost model and the dense data.
- → This explainer understands the model logic and computes contribution scores.
+       • We create a SHAP explainer using the trained XGBoost model and the dense data.
+       → This explainer understands the model logic and computes contribution scores.
 
 3. SHAP Values Computation
-SHAP values tell how much each feature pushes a prediction toward class 1 (fraud) or class 0 (non-fraud).
+   
+• SHAP values tell how much each feature pushes a prediction toward class 1 (fraud) or class 0 (non-fraud).
 
-4. Feature Names
+5. Feature Names
    
  • We combine:
 
@@ -405,13 +418,13 @@ SHAP values tell how much each feature pushes a prediction toward class 1 (fraud
 
 5. Summary Plot Visualization
 
-We generate a SHAP summary plot which shows:
+• We generate a SHAP summary plot which shows:
 
- • Most influential features
+    • Most influential features
 
- • Direction (does a feature increase or decrease fraud risk?)
+    • Direction (does a feature increase or decrease fraud risk?)
 
- • Distribution and strength of these features across samp
+    • Distribution and strength of these features across samp
 
  
  ![image](https://github.com/user-attachments/assets/855b0c7e-2df2-4199-85df-6ec4b8735bfa)
@@ -422,15 +435,15 @@ High-Risk Job Listings Alert
 
 1. Why This Matters
    
-Jobs with very high fraud probability (e.g., 0.95) are more likely to be genuinely fraudulent and may require:
+• Jobs with very high fraud probability (e.g., 0.95) are more likely to be genuinely fraudulent and may require:
 
-   • Human verification or moderation
+     • Human verification or moderation
 
-   • Platform filtering/blocking
+     • Platform filtering/blocking
 
-   • Alerts to internal teams
+     • Alerts to internal teams
 
- 3. Implementation Overview
+ 2. Implementation Overview
     
 • Thresholding
 A cut-off of 0.80 is used to flag high-confidence frauds.
@@ -442,11 +455,11 @@ From the test dataset, all listings with fraud_probability ≥ 0.8 are filtered 
 • Formatted Alert
 For each high-risk listing, an alert message is generated with:
 
-   • Title
+    • Title
 
-   • Location
+    • Location
 
-   • Fraud Probability (rounded to 2 decimal places)
+    • Fraud Probability (rounded to 2 decimal places)
 
 
 
@@ -461,15 +474,17 @@ The F1 Score combines Precision and Recall into a single metric, making it ideal
  ![image](https://github.com/user-attachments/assets/861f0e34-dfa7-4a36-a11f-25f8d9280c96)
 
 Threshold Analysis
-    • X-axis: Probability thresholds for classification (from 0 to 1)
 
-    • Y-axis: F1 Score achieved at each threshold
+• X-axis: Probability thresholds for classification (from 0 to 1)
+
+• Y-axis: F1 Score achieved at each threshold
 
 • A blue curve shows how the F1 Score changes across different thresholds.
 • A red dashed vertical line marks the best-performing threshold.
 
 Key Results
 • Best Threshold: 0.21
+
         • Instead of the standard 0.5 threshold, our model performs best when classifying any instance with a fraud probability above 21% as fraudulent.
 
 • Peak F1 Score: ~0.81
@@ -478,7 +493,7 @@ Key Results
 
 Why such a low threshold? 
 
-   • our model tends to predict conservative (low) probabilities even for actual fraud cases, so using a lower cutoff helps catch more fraudulent transactions while maintaining reasonable precision
+    • our model tends to predict conservative (low) probabilities even for actual fraud cases, so using a lower cutoff helps catch more fraudulent transactions while maintaining reasonable precision
 
 Implementation Impact
 
@@ -493,6 +508,7 @@ Implementation Impact
 ![image](https://github.com/user-attachments/assets/782894e4-3560-4985-a43c-a43a861e869d)
 
 •  Threshold Tuning
+
   • To optimize fraud detection, we tuned the classification threshold instead of using the default 0.5. The best performance was achieved at threshold = 0.21, giving the highest F1 Score of 0.8109 — effectively balancing precision and recall.
 
      Threshold	         F1 Score
@@ -502,21 +518,23 @@ Implementation Impact
 
  • Final Performance (Validation Set)
  
- Metric                  Value                     Interpretation                                    
+     Metric                   Value                     Interpretation                                    
   
-• Accuracy                 0.98                        Overall correct predictions.                      
-• Precision (Fraud)        0.78                        78% of fraud predictions were correct.            
-• Recall (Fraud)           0.85                        85% of actual frauds were detected.               
-• F1 Score (Fraud)         0.81                        Balanced metric of fraud detection.               
-• Macro Avg (F1)           0.90                        Treats both classes equally.                      
-• Weighted Avg (F1         0.98                        Reflects performance considering class imbalance. 
+    • Accuracy                 0.98                        Overall correct predictions.                      
+    • Precision (Fraud)        0.78                        78% of fraud predictions were correct.            
+    • Recall (Fraud)           0.85                        85% of actual frauds were detected.               
+    • F1 Score (Fraud)         0.81                        Balanced metric of fraud detection.               
+    • Macro Avg (F1)           0.90                        Treats both classes equally.                      
+    • Weighted Avg (F1         0.98                        Reflects performance considering class imbalance. 
 
 • Confusion Matrix
-                       Predicted Real	                 Predicted Fraud
-Actually Real	         2688 	                          34 (False Positives)
-Actually Fraud	        21 (False Negatives)	           118 
+
+                              Predicted Real	                 Predicted Fraud
+    • Actually Real	         2688 	                          34 (False Positives)
+    • Actually Fraud	        21 (False Negatives)	           118 
 
 •  Key Insights
+
     • Only 21 fraud cases were missed (false negatives).
 
     • Only 34 real jobs were wrongly flagged as fraud (false positives).
@@ -542,79 +560,82 @@ Closer to 1 = more likely fraud
 • Y-axis: Frequency
 How many samples fall into each probability range/bin
 
- • Most predictions clustered near 0 (legitimate jobs)
 
- • Small cluster near 1.0 (fraudulent jobs)
+    • Most predictions clustered near 0 (legitimate jobs)
 
- • Sparse middle values indicate decisive model behavior
+    • Small cluster near 1.0 (fraudulent jobs)
+
+    • Sparse middle values indicate decisive model behavior
 
 2. Model Behavior:
 
- • High confidence predictions - model rarely assigns intermediate probabilities (0.4-0.6)
+       • High confidence predictions - model rarely assigns intermediate probabilities (0.4-0.6)
 
- • Strong feature separability - clear distinction between fraud and legitimate postings
+       • Strong feature separability - clear distinction between fraud and legitimate postings
 
- •  The pattern reflects a class imbalance—fraudulent jobs are rare compared to legitimate ones.
+       •  The pattern reflects a class imbalance—fraudulent jobs are rare compared to legitimate ones.
 
- • A smoothed KDE curve (red line) highlights the underlying distribution, confirming the two peaks (at 0 and 1).
+       • A smoothed KDE curve (red line) highlights the underlying distribution, confirming the two peaks (at 0 and 1).
 
 3. Practical Implications:
 
- • Low threshold justified - setting threshold around 0.21 captures frauds in the right tail
+       • Low threshold justified - setting threshold around 0.21 captures frauds in the right tail
  
- • High threshold problematic - using 0.5+ would miss many actual frauds
+       • High threshold problematic - using 0.5+ would miss many actual frauds
  
- • The model is reliable for the majority class (legitimate jobs), and also identifies true frauds at the far right.
+       • The model is reliable for the majority class (legitimate jobs), and also identifies true frauds at the far right.
 
 	
 ![image](https://github.com/user-attachments/assets/3f133980-47c0-4866-81ce-2f6f7eb66323)
 
 
 
-	What This Pie Chart Shows
+What This Pie Chart Shows
+
 Title: “Predicted Fake vs Real Job Listings”
+
 1. Prediction Breakdown:
    
-    • 94.8% of job listings are predicted as real (light blue).
+       • 94.8% of job listings are predicted as real (light blue).
 
-    • 5.2% are predicted as fraudulent (salmon red).
+       • 5.2% are predicted as fraudulent (salmon red).
 
  2. Class Imbalance:
 
-    • The chart reflects real-world data where most jobs are genuine.
+        • The chart reflects real-world data where most jobs are genuine.
 
  3. Fraud Detection Strategy:
     
-   • 5.2% is significantly higher than the true base rate of fraud in most datasets (usually <2%), meaning your model is trying to err on the side of         caution, which is a good strategy in fraud detection.
+        • 5.2% is significantly higher than the true base rate of fraud in most datasets (usually <2%), meaning your model is trying to err on the side of caution, which is a good strategy in fraud detection.
 
  4. Practical Implication:
 
-• It’s likely catching more fraud at the cost of a few false positives, which is usually acceptable in fraud screening systems.
-• This cautious approach is typical and effective in fraud detection systems
+        • It’s likely catching more fraud at the cost of a few false positives, which is usually acceptable in fraud screening systems.
+        • This cautious approach is typical and effective in fraud detection systems
 
 ![image](https://github.com/user-attachments/assets/af1027a8-c404-43e0-82be-d48638e9dabc)
 
 1. Feature Importance Order:
 
-  • Features are listed top-to-bottom by their average impact on predictions (most important at the top).
+       • Features are listed top-to-bottom by their average impact on predictions (most important at the top).
 
 2. SHAP Value (X-axis):
 
-  • Positive SHAP values: Push prediction toward fraud (class = 1).
+       • Positive SHAP values: Push prediction toward fraud (class = 1).
 
-  • Negative SHAP values: Push prediction toward real (class = 0).
+       • Negative SHAP values: Push prediction toward real (class = 0).
 
 3. Dots (Individual Predictions):
 
-  • Each dot represents one job listing.
+       • Each dot represents one job listing.
 
-  • Dot position shows how much that feature influenced the fraud prediction for that listing.
+       • Dot position shows how much that feature influenced the fraud prediction for that listing.
 
 4. Color (Feature Value):
 
-   • Red/pink = High feature value.
+       • Red/pink = High feature value.
 
-   • Blue = Low feature value.
+       • Blue = Low feature value.
 
 5. Key Feature Insights:
 
