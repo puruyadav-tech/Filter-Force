@@ -717,7 +717,7 @@ since we have to speed up the video in order to compressed to 8mins.so we kindly
 
 🎥 [Watch the presentation video]
 
-(https://youtu.be/0UAbC7MksfM) — Recommended speed: 0.5x for the best viewing experience.
+ — Recommended speed: 0.5x for the best viewing experience.
 
 
 
