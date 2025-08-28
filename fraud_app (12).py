@@ -103,6 +103,58 @@ with st.sidebar.expander("⚙️ Settings"):
 with st.sidebar.expander("ℹ️ About"):
     st.markdown("This app detects fraudulent job postings using AI.")
 
+# --- SIDEBAR ---
+st.sidebar.markdown("<div class='sidebar-header'>🔍 Sidebar Menu</div>", unsafe_allow_html=True)
+
+st.sidebar.markdown("""
+<div class='sidebar-menu'>
+    <h4><a href="#home" style="text-decoration:none; color:white;">🏠 Home</a></h4>
+    <p>Overview of the tool and its capabilities.</p>
+
+    <h4><a href="#how" style="text-decoration:none; color:white;">⚙️ How It Works</a></h4>
+    <p>Detailed explanation of the algorithms behind the detection.</p>
+
+    <h4><a href="#ml" style="text-decoration:none; color:white;">🤖 Machine Learning</a></h4>
+    <p>Insights into the technologies used.</p>
+
+    <h4><a href="#analysis" style="text-decoration:none; color:white;">📊 Real-time Analysis</a></h4>
+    <p>Features and benefits of real-time monitoring.</p>
+
+    <h4><a href="#results" style="text-decoration:none; color:white;">⚡ Instant Results</a></h4>
+    <p>Overview of the speedy analysis process.</p>
+
+    <h4><a href="#support" style="text-decoration:none; color:white;">📞 Support</a></h4>
+    <p>FAQs and contact information for assistance.</p>
+</div>
+""", unsafe_allow_html=True)
+
+
+# --- MAIN CONTENT WITH ANCHORS ---
+st.markdown("<a name='home'></a>", unsafe_allow_html=True)
+st.header("🏠 Home")
+st.write("Overview of the tool and its capabilities...")
+
+st.markdown("<a name='how'></a>", unsafe_allow_html=True)
+st.header("⚙️ How It Works")
+st.write("Detailed explanation of the algorithms behind the detection...")
+
+st.markdown("<a name='ml'></a>", unsafe_allow_html=True)
+st.header("🤖 Machine Learning")
+st.write("Insights into the technologies used...")
+
+st.markdown("<a name='analysis'></a>", unsafe_allow_html=True)
+st.header("📊 Real-time Analysis")
+st.write("Features and benefits of real-time monitoring...")
+
+st.markdown("<a name='results'></a>", unsafe_allow_html=True)
+st.header("⚡ Instant Results")
+st.write("Overview of the speedy analysis process...")
+
+st.markdown("<a name='support'></a>", unsafe_allow_html=True)
+st.header("📞 Support")
+st.write("FAQs and contact information for assistance...")
+
+
 st.sidebar.markdown("""
 <div class='sidebar-menu'>
     <h4>🏠 Home</h4>
