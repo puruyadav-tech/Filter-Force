@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+"""fraud_app.ipynb - Streamlit Job Fraud Detector"""
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -147,9 +150,6 @@ st.write("FAQs and contact information for assistance...")
 # --- DATA LOADING, MODEL, UPLOAD & PREDICTIONS SECTION -------
 # ============================================================
 
-
-
-# --- DATA LOADING ---
 @st.cache_data(ttl=3600)
 def load_data():
     file_id = "1oxygynnHOAU3NU3S8xHRdBS9WA_K1E7y"
@@ -163,7 +163,6 @@ def load_data():
         train_df = pd.DataFrame()
     return train_df
 
-# --- DATA PREPARATION ---
 @st.cache_data(ttl=3600)
 def prepare(df):
     df = df.copy()
@@ -172,7 +171,6 @@ def prepare(df):
             df[col] = ''
         else:
             df[col] = df[col].fillna('')
-    # Only handle 'email' if it exists
     if 'email' in df.columns:
         df['email'] = df['email'].fillna('')
         df['email_domain'] = df['email'].apply(lambda x: x.split('@')[-1] if '@' in x else '')
@@ -196,7 +194,6 @@ def prepare(df):
     )
     return df
 
-# --- MODEL TRAINING ---
 @st.cache_resource(ttl=86400) 
 def train_model(train_df):
     if train_df.empty:
@@ -217,13 +214,12 @@ def train_model(train_df):
     best_threshold = thresholds[np.argmax(f1s)]
     return model, tfidf, best_threshold
 
-# --- MAIN FLOW ---
 train_df = load_data()
 if not train_df.empty:
     train_df = prepare(train_df)
 model, tfidf, best_threshold = train_model(train_df)
 
-# --- SIDEBAR UPLOAD ---
+# --- FILE UPLOAD + PREDICTIONS ---
 st.markdown("## 📤 Upload a CSV File to Detect Fraudulent Jobs")
 uploaded_file = st.file_uploader("Upload CSV for Prediction", type="csv")
 analyze_btn = st.button("🚀 Analyze Now")
@@ -250,7 +246,7 @@ if uploaded_file is not None:
                 file_name="fraud_predictions.csv",
                 mime="text/csv"
             )
-            # --- VISUALIZATION 1: HISTOGRAM (smaller size) ---
+            # --- VISUALIZATION ---
             st.markdown("### 📊 Probability Distribution")
             col1, col2, col3 = st.columns([1,2,1])
             with col2:
@@ -262,7 +258,7 @@ if uploaded_file is not None:
                 ax.set_facecolor('#0e1117')
                 fig.patch.set_facecolor('#0e1117')
                 st.pyplot(fig)
-            # --- VISUALIZATION 2: PIE CHART (smaller size) ---
+
             st.markdown("### 🧮 Fraud Prediction Breakdown")
             with col2:
                 fraud_counts = test_df['fraud_predicted'].value_counts()
@@ -279,8 +275,6 @@ if uploaded_file is not None:
             st.warning("Model not loaded. Cannot generate predictions.")
     except Exception as e:
         st.error(f"Error processing uploaded file: {e}")
-# else:
-#     st.info("👈 Upload a CSV file from the sidebar to begin analysis.")
 
 # --- WHY CHOOSE OUR AI SOLUTION SECTION ---
 st.markdown("---")
@@ -295,17 +289,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-card_icons = [
-    "🛡️", "⚡", "📊",
-    "🧑‍💼", "👁️", "✅"
-]
+card_icons = ["🛡️", "⚡", "📊", "🧑‍💼", "👁️", "✅"]
 card_titles = [
-    "Advanced Fraud Detection",
-    "Lightning Fast Analysis",
-    "Detailed Analytics",
-    "Protect Job Seekers",
-    "Real-time Monitoring",
-    "High Accuracy Rate"
+    "Advanced Fraud Detection", "Lightning Fast Analysis", "Detailed Analytics",
+    "Protect Job Seekers", "Real-time Monitoring", "High Accuracy Rate"
 ]
 card_descs = [
     "Our AI model analyzes multiple data points to identify suspicious job postings with high accuracy.",
@@ -315,7 +302,7 @@ card_descs = [
     "Continuous monitoring of job posting platforms to detect threats proactively.",
     "Achieved 95%+ accuracy in fraud detection through advanced learning techniques."
 ]
-# Display as 3 columns per row
+
 for i in range(0, len(card_titles), 3):
     cols = st.columns(3)
     for j, col in enumerate(cols):
