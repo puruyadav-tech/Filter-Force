@@ -718,9 +718,6 @@ since we have to speed up the video in order to compressed to 8mins.so we kindly
 🎥 [Watch the presentation video]
 
  — Recommended speed: 0.5x for the best viewing experience.
- <img width="2072" height="1190" alt="image" src="https://github.com/user-attachments/assets/4abf630c-ebb2-4cda-99fb-dde53b57a611" />
-
-
 
 
 
